@@ -17,7 +17,7 @@ clear && \
 
 # Deploy: traefik.socat.stack.yml
 
-Stack as; proxy
+Stack as: proxy
 
 View Traefik dashboard at *any* swarm node: http://piarmy01:8080/dashboard/
 
