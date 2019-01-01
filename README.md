@@ -15,21 +15,23 @@ clear && \
     -v /var/run/docker.sock:/var/run/docker.sock \
   mattwiater/rpi-socat /bin/ash
 
-# Deploy: traefik.socat.stack.yml
+# Deploy: traefik.socat.stack.yml via Portainer
 
 Stack as: proxy
 
 View Traefik dashboard at *any* swarm node: http://piarmy01:8080/dashboard/
 
-# Delpoy: test01.service.yml
+# Delpoy: test01.service.yml via Portainer
 
 Stack as: test01
 
-Visit any node in swarm: http://piarmy03
+Visit any node in swarm: http://piarmy03. Repeated visits will loop through each service task b/c wrr.
 
-# Delpoy: test02.service.yml
+# Delpoy: test02.service.yml via Portainer
 
 Stack as: test02
 
-Visit any node in swarm: http://piarmy03/test
+This stack is the same service as test01, but named whoami02, and uses drr istead of the default wrr
+
+Visit any node in swarm: http://piarmy03/test. Repeated visits will bring up "random" services b/c drr.
 

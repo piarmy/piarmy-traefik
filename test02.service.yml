@@ -9,6 +9,7 @@ services:
       labels:
         traefik.docker.network: app-entry
         traefik.backend: whoami02
+        traefik.backend.loadbalancer.method: drr
         traefik.frontend.rule: "Path: /test"
         traefik.port: 8000
 
