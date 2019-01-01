@@ -1,0 +1,17 @@
+version: "3.6"
+
+services:
+  whoami01:
+    image: hypriot/rpi-whoami
+    networks:
+      - app-entry
+    deploy:
+      labels:
+        traefik.docker.network: app-entry
+        traefik.backend: whoami01
+        traefik.frontend.rule: "Path: /"
+        traefik.port: 8000
+
+networks:
+  app-entry:
+    external: true

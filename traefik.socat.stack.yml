@@ -1,0 +1,37 @@
+# docker network create --attachable --driver overlay --opt encrypted=true app-entry
+# docker network create --attachable --driver overlay --opt encrypted=true mgmt
+
+version: "3.6"
+
+services:
+  socat:
+    image: mattwiater/rpi-socat
+    command: tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - mgmt
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+  traefik:
+    image: mattwiater/rpi-traefik
+    command: --web --api --docker --docker.endpoint=tcp://socat:2375 --docker.watch --docker.swarmMode --logLevel=DEBUG
+    ports:
+      - 80:80
+      - 8080:8080
+    networks:
+      - mgmt
+      - app-entry
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == piarmy02
+
+networks:
+  mgmt:
+    external: true
+  app-entry:
+    external: true
