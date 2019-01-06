@@ -15,6 +15,11 @@ clear && \
     -v /var/run/docker.sock:/var/run/docker.sock \
   mattwiater/rpi-socat /bin/ash
 
+# Build traefik container on pairmy02
+
+clear && docker build -t mattwiater/rpi-traefik .
+
+
 # Deploy: traefik.socat.stack.yml via Portainer
 
 Stack as: proxy
