@@ -19,6 +19,10 @@ clear && \
 
 clear && docker build -t mattwiater/rpi-traefik .
 
+# Test / Update
+clear && \
+  docker run -it \
+  mattwiater/rpi-traefik /bin/bash
 
 # Deploy: traefik.socat.stack.yml via Portainer
 
