@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM hypriot/rpi-alpine-scratch
 
 RUN apk update &&\
     apk upgrade &&\

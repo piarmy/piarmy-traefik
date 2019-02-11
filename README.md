@@ -1,3 +1,8 @@
+# REF1: https://blog.ruanbekker.com/blog/2018/10/23/build-a-traefik-proxy-image-for-your-raspberry-pi-on-docker-swarm/
+
+docker network create --attachable --driver overlay --opt encrypted=true app-entry
+docker network create --attachable --driver overlay --opt encrypted=true mgmt
+
 # Updating Base System (Docker CE):
 clear && sudo apt-get update && \
   sudo apt-get -y upgrade && \

@@ -2,7 +2,7 @@ version: "3.6"
 
 services:
   whoami01:
-    image: hypriot/rpi-whoami
+    image: containous/whoami
     networks:
       - app-entry
     deploy:
@@ -10,7 +10,19 @@ services:
         traefik.docker.network: app-entry
         traefik.backend: whoami01
         traefik.frontend.rule: "Path: /"
-        traefik.port: 8000
+        traefik.port: 80
+
+  whoami02:
+    image: containous/whoami
+    networks:
+      - app-entry
+    deploy:
+      labels:
+        traefik.docker.network: app-entry
+        traefik.backend: whoami02
+        traefik.backend.loadbalancer.method: drr
+        traefik.frontend.rule: "Path: /test"
+        traefik.port: 80
 
 networks:
   app-entry:
