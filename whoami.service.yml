@@ -1,0 +1,62 @@
+version: "3.6"
+
+services:
+  whoami01:
+    image: containous/whoami
+    networks:
+      - app-entry
+    deploy:
+      labels:
+        traefik.docker.network: app-entry
+        traefik.backend: whoami01
+        traefik.backend.loadbalancer.method: wrr
+        traefik.backend.healthcheck.path: "/whoami/1"
+        traefik.backend.healthcheck.interval: "5s"
+        traefik.frontend.rule: "Path: /whoami/1"
+        traefik.port: 80
+
+  whoami02:
+    image: containous/whoami
+    networks:
+      - app-entry
+    deploy:
+      labels:
+        traefik.docker.network: app-entry
+        traefik.backend: whoami02
+        traefik.backend.loadbalancer.method: wrr
+        traefik.backend.healthcheck.path: "/whoami/2"
+        traefik.backend.healthcheck.interval: "5s"
+        traefik.frontend.rule: "Path: /whoami/2"
+        traefik.port: 80
+
+  whoami03:
+    image: containous/whoami
+    networks:
+      - app-entry
+    deploy:
+      labels:
+        traefik.docker.network: app-entry
+        traefik.backend: whoami03
+        traefik.backend.loadbalancer.method: wrr
+        traefik.backend.healthcheck.path: "/whoami/3"
+        traefik.backend.healthcheck.interval: "5s"
+        traefik.frontend.rule: "Path: /whoami/3"
+        traefik.port: 80
+
+  whoami04:
+    image: containous/whoami
+    networks:
+      - app-entry
+    deploy:
+      labels:
+        traefik.docker.network: app-entry
+        traefik.backend: whoami04
+        traefik.backend.loadbalancer.method: wrr
+        traefik.backend.healthcheck.path: "/whoami/4"
+        traefik.backend.healthcheck.interval: "5s"
+        traefik.frontend.rule: "Path: /whoami/4"
+        traefik.port: 80
+
+networks:
+  app-entry:
+    external: true

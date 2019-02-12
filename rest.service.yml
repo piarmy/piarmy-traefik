@@ -1,0 +1,30 @@
+version: "3.6"
+
+services:
+  get:
+    image: mattwiater/rest-server
+    networks:
+      - app-entry
+    deploy:
+      labels:
+        traefik.docker.network: app-entry
+        traefik.backend: get
+        traefik.backend.loadbalancer.method: wrr
+        traefik.frontend.rule: "Method: GET;Path: /api;PathPrefixStrip:/api"
+        traefik.port: 9001
+
+  post:
+    image: mattwiater/rest-server
+    networks:
+      - app-entry
+    deploy:
+      labels:
+        traefik.docker.network: app-entry
+        traefik.backend: post
+        traefik.backend.loadbalancer.method: wrr
+        traefik.frontend.rule: "Method: POST;Path: /api;PathPrefixStrip:/api"
+        traefik.port: 9001
+
+networks:
+  app-entry:
+    external: true
