@@ -10,6 +10,8 @@ services:
         traefik.docker.network: app-entry
         traefik.backend: get
         traefik.backend.loadbalancer.method: wrr
+        traefik.backend.maxconn.amount: 2
+        traefik.backend.circuitbreaker.expression: 'NetworkErrorRatio() > 0.5'
         traefik.frontend.rule: "Method: GET;Path: /api;PathPrefixStrip:/api"
         traefik.port: 9001
 
