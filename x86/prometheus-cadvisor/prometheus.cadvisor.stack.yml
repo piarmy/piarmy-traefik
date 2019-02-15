@@ -1,4 +1,5 @@
 # REF: https://prometheus.io/docs/guides/cadvisor/
+# REF: https://github.com/google/cadvisor/blob/master/docs/api_v2.md
 
 version: '3.3'
 services:
@@ -40,6 +41,15 @@ services:
       - rhswarm
     ports:
       - 6379:6379
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    depends_on:
+      - prometheus
+    networks:
+      - rhswarm
 
 networks:
   rhswarm:

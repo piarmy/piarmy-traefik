@@ -22,7 +22,7 @@ services:
     command: --web --api --docker --docker.endpoint=tcp://socat:2375 --docker.watch --docker.swarmMode --logLevel=DEBUG
     ports:
       - 80:80
-      - 8080:8080
+      - 8000:8080
     networks:
       - mgmt
       - app-entry
