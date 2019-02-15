@@ -1,6 +1,6 @@
 # REF: https://prometheus.io/docs/guides/cadvisor/
 
-version: '3.2'
+version: '3.3'
 services:
 
   prometheus:
@@ -12,8 +12,9 @@ services:
       - 9090:9090
     command:
       - --config.file=/etc/prometheus/prometheus.yml
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    configs:
+      - source: prometheus.yml
+        target: /etc/prometheus/prometheus.yml:ro
     depends_on:
       - cadvisor
 
@@ -42,4 +43,8 @@ services:
 
 networks:
   rhswarm:
+    external: true
+
+configs:
+  prometheus.yml:
     external: true
