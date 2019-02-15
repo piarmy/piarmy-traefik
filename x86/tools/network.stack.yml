@@ -1,0 +1,15 @@
+version: '3.3'
+
+services:
+  networking:
+    image: raesene/alpine-nettools
+    deploy:
+      mode: global
+    ports:
+      - 2200:22
+    networks:
+      - rhswarm
+
+networks:
+  rhswarm:
+    external: true

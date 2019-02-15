@@ -5,7 +5,9 @@ services:
     image: mattwiater/rest-server
     networks:
       - app-entry
+      - rhswarm
     deploy:
+      replicas: 2
       labels:
         traefik.docker.network: app-entry
         traefik.backend: get
@@ -19,6 +21,7 @@ services:
     image: mattwiater/rest-server
     networks:
       - app-entry
+      - rhswarm
     deploy:
       labels:
         traefik.docker.network: app-entry
@@ -29,4 +32,6 @@ services:
 
 networks:
   app-entry:
+    external: true
+  rhswarm:
     external: true

@@ -11,6 +11,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - mgmt
+      - rhswarm
     deploy:
       placement:
         constraints:
@@ -25,13 +26,16 @@ services:
     networks:
       - mgmt
       - app-entry
+      - rhswarm
     deploy:
       placement:
         constraints:
-          - node.hostname == mjw-vm-ruby
+          - node.role == manager
 
 networks:
   mgmt:
     external: true
   app-entry:
+    external: true
+  rhswarm:
     external: true
