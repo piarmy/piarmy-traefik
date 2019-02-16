@@ -7,13 +7,13 @@ services:
       - app-entry
       - rhswarm
     deploy:
-      replicas: 2
+      replicas: 10
       labels:
         traefik.docker.network: app-entry
         traefik.backend: get
-        traefik.backend.loadbalancer.method: wrr
-        traefik.backend.maxconn.amount: 2
-        traefik.backend.circuitbreaker.expression: 'NetworkErrorRatio() > 0.5'
+        traefik.backend.loadbalancer.method: drr
+        #traefik.backend.circuitbreaker.expression: "LatencyAtQuantileMS(50.0) > 1"
+        traefik.backend.healthcheck.path: "/"
         traefik.frontend.rule: "Method: GET;Path: /api;PathPrefixStrip:/api"
         traefik.port: 9001
 

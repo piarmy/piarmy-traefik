@@ -1,11 +1,19 @@
 require 'uri'
 require 'net/http'
+require 'json'
+require 'awesome_print'
 
-threads  = []
+threads = []
 
-100.times do
+iterations = 10000
+
+hosts = []
+
+iterations.times do |iteration|
+  puts iteration
+
   threads << Thread.new do
-    url = URI("http://mjw-vm-ruby/api")
+    url = URI("http://mqtt/api")
 
     http = Net::HTTP.new(url.host, url.port)
 
@@ -13,8 +21,15 @@ threads  = []
     request["Content-Type"] = 'application/json'
 
     response = http.request(request)
-    puts response.read_body
+    #puts "[#{Time.now()}] #{response.read_body}"
+    #ap JSON.parse(response.read_body)["hostname"]
+    hosts.push(JSON.parse(response.read_body)["hostname"])
   end
 
   threads.each(&:join)
 end
+
+counts = Hash.new(0)
+hosts.each { |name| counts[name] += 1 }
+ap hosts
+ap counts
