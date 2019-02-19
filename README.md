@@ -49,3 +49,5 @@ This stack is the same service as test01, but named whoami02, and uses drr istea
 
 Visit any node in swarm: http://piarmy03/test. Repeated visits will bring up "random" services b/c drr.
 
+clear && docker build -t mattwiater/socat .
+clear && docker build -t mattwiater/traefik .
